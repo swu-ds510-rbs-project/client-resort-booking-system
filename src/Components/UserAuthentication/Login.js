@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, ButtonToolbar, FlexboxGrid, Form } from 'rsuite'
 import axios from 'axios';
 import { config } from '../../config.js';
@@ -18,8 +18,10 @@ export const Login = () => {
             const url = `${HOST}/guest/login`
             let result = await axios.post(url, formValue)
             if (result.data.status === true) {
-                localStorage.setItem("token", result.data.data.token)
-                navigate("profile")
+                const token = result.data.data.token
+                localStorage.setItem("token", token)
+                alert("เข้าสู่ระบบสำเร็จ!")
+                navigate(`/profile?id=${result.data.data.guest_id}`)
             }
         } catch (e) {
             const err = e.response.data.error
