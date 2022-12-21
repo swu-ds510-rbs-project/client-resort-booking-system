@@ -19,7 +19,7 @@ export const HouseList = () => {
         const date = new Date(target)
         const tomorrow = new Date(date)
         tomorrow.setDate(date.getDate() + 1);
-        const tomorrowFormat = `${tomorrow.getFullYear()}-${tomorrow.getMonth()+1}-${tomorrow.getDate()}`
+        const tomorrowFormat = `${tomorrow.getFullYear()}-${tomorrow.getMonth() + 1}-${tomorrow.getDate()}`
         return tomorrowFormat
     }
 
@@ -43,7 +43,6 @@ export const HouseList = () => {
         const url = `${HOST}/house/${checkinDate}/${checkoutDate}`
         let result = await axios.get(url)
         setHouseList(result.data.data)
-        console.log(result.data.data)
     }
 
     return (
