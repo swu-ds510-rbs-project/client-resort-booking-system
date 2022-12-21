@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -13,7 +13,10 @@ import 'rsuite/dist/rsuite.min.css';
 import { TheNavbar } from './Components/Navbar';
 import { HouseList } from './Components/HouseSearching/HouseList';
 
+import { Login } from './Components/UserAuthentication/Login';
+import { Register } from './Components/UserAuthentication/Register';
 import './font.css';
+import { Profile } from './Components/UserAuthentication/Profile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,6 +25,10 @@ root.render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/available-houses" element={<HouseList />} />
+
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   </BrowserRouter>
 );
