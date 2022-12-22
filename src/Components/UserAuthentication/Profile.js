@@ -14,9 +14,10 @@ export const Profile = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) {
+    const adminToken = localStorage.getItem("adminToken");
+    if (!token && !adminToken) {
       navigate("/login")
-    }
+    } else if (adminToken) navigate("/dashboard")
     else verify(token)
   }, [guest])
 
@@ -47,7 +48,7 @@ export const Profile = () => {
           <p className='fs-5'>เบอร์โทร: {guest && guest.tel}</p>
           <p className='fs-5'>เบอร์โทร: {guest && guest.email}</p>
 
-          <HistoryModal guest_id={guest && guest.guest_id}/>
+          <HistoryModal guest_id={guest && guest.guest_id} />
         </FlexboxGrid.Item>
       </FlexboxGrid>
     </div>

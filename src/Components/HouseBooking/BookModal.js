@@ -19,9 +19,10 @@ export const BookModal = ({ house, checkinDate, checkoutDate, totalDays }) => {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if (!token) {
+        const adminToken = localStorage.getItem("adminToken");
+        if (!token && !adminToken) {
             navigate("/login")
-        }
+        } else if (adminToken) navigate("/dashboard")
         else verify(token)
     }, [open])
 
