@@ -4,15 +4,16 @@ import { useSearchParams } from 'react-router-dom';
 
 import resort from '../../images/resort.jpg';
 import { config } from '../../config.js';
-import { Col, FlexboxGrid, Panel, Placeholder, Row } from 'rsuite';
+import { Button, Col, FlexboxGrid, Panel, Placeholder, Row } from 'rsuite';
+import { BookModal } from '../HouseBooking/BookModal';
 const HOST = config.HOST;
-
 
 export const HouseList = () => {
     const [searchParams] = useSearchParams();
     const [houseList, setHouseList] = useState([]);
     const [checkinDate, setCheckinDate] = useState("-");
     const [checkoutDate, setCheckoutDate] = useState("-");
+    const [totalDays, setTotalDays] = useState(0);
 
     // tomorrow date
     const getTomorrow = (target) => {
@@ -32,9 +33,12 @@ export const HouseList = () => {
         const checkinDateParam = searchParams.get("checkinDate") ? searchParams.get("checkinDate") : todayFormat
         // set checkoutDate
         const checkoutDateParam = searchParams.get("checkoutDate") > searchParams.get("checkinDate") ? searchParams.get("checkoutDate") : getTomorrow(checkinDateParam)
+        // set totalDays
+        const totalDaysParam = searchParams.get("totalDays") ? searchParams.get("totalDays") : 1
 
         setCheckinDate(checkinDateParam)
         setCheckoutDate(checkoutDateParam)
+        setTotalDays(totalDaysParam)
 
         searchHouse(checkinDateParam, checkoutDateParam)
     }, [])
@@ -55,7 +59,7 @@ export const HouseList = () => {
                     {houseList.map((house) => {
                         return (
                             <Panel header={house.name} bordered>
-                                <Row>
+                                <Row className='text-start'>
                                     <Col>
                                         <img src={resort} alt="logo" width={250} />
                                     </Col>
@@ -64,8 +68,9 @@ export const HouseList = () => {
                                         {house.no_of_large_bed > 0 ? <p>x{house.no_of_large_bed} เตียงใหญ่</p> : null}
                                         {house.no_of_small_bed > 0 ? <p>x{house.no_of_small_bed} เตียงเดี่ยว</p> : null}
                                         <p>{house.size} ตร.ม.</p>
-                                        <p>รายละเอียด {house.detail}</p>
+                                        <p>{house.detail}</p>
                                         <p>฿ {house.price}/คืน</p>
+                                        <BookModal house={house} checkinDate={checkinDate} checkoutDate={checkoutDate} totalDays={totalDays}/>
                                     </Col>
                                 </Row>
                             </Panel>
