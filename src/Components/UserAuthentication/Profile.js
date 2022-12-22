@@ -3,21 +3,20 @@ import { FlexboxGrid } from 'rsuite'
 import axios from 'axios';
 import { config } from '../../config.js';
 import { useNavigate } from 'react-router-dom';
+import { HistoryModal } from '../BookingHistory/HistoryModal.js';
 const HOST = config.HOST;
 
 export const Profile = () => {
-  
+
   const navigate = useNavigate();
 
-  const [isLogin, setIsLogin] = useState(false);
   const [guest, setGuest] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      setIsLogin(false)
       navigate("/login")
-    } 
+    }
     else verify(token)
   }, [guest])
 
@@ -31,11 +30,9 @@ export const Profile = () => {
       })
       if (result.data.status) {
         setGuest(result.data.data)
-        setIsLogin(true)
       }
     } catch (e) {
       localStorage.removeItem('token')
-      setIsLogin(false)
       alert("กรุณาเข้าสู่ระบบอีกครั้ง!")
       navigate("/login")
     }
@@ -49,6 +46,8 @@ export const Profile = () => {
           <p className='fs-5'>ชื่อ-สกุล: {guest && guest.first_name + " " + guest.last_name}</p>
           <p className='fs-5'>เบอร์โทร: {guest && guest.tel}</p>
           <p className='fs-5'>เบอร์โทร: {guest && guest.email}</p>
+
+          <HistoryModal guest_id={guest && guest.guest_id}/>
         </FlexboxGrid.Item>
       </FlexboxGrid>
     </div>
