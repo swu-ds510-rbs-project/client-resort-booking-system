@@ -15,9 +15,10 @@ function App() {
         alert("กรุณาเลือกวันที่ check-out ให้เป็นวันที่หลัง check-in")
         setSelectDates(null)
       } else {
-        let checkinDate = `${selectDates[0].getFullYear()}-${selectDates[0].getMonth()+1}-${selectDates[0].getDate()}`
-        let checkoutDate = `${selectDates[1].getFullYear()}-${selectDates[0].getMonth()+1}-${selectDates[0].getDate()}`
-        return navigate(`available-houses?checkinDate=${checkinDate}&checkoutDate=${checkoutDate}`)
+        let checkinDate = `${selectDates[0].getFullYear()}-${selectDates[0].getMonth() + 1}-${selectDates[0].getDate()}`
+        let checkoutDate = `${selectDates[1].getFullYear()}-${selectDates[1].getMonth() + 1}-${selectDates[1].getDate()}`
+        let totalDays = (selectDates[1] - selectDates[0]) / (1000 * 60 * 60 * 24)
+        return navigate(`available-houses?checkinDate=${checkinDate}&checkoutDate=${checkoutDate}&totalDays=${totalDays}`)
       }
     }
   }, [selectDates])
@@ -33,10 +34,10 @@ function App() {
             size="lg"
             disabledDate={beforeToday()}
             value={selectDates}
-            onChange={setSelectDates} 
-            ranges = {[]}
+            onChange={setSelectDates}
+            ranges={[]}
             block />
-          <img src={resort} alt="logo" width={450} className="mt-3"/>
+          <img src={resort} alt="logo" width={450} className="mt-3" />
         </FlexboxGrid.Item>
       </FlexboxGrid>
     </div>
