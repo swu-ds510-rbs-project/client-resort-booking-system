@@ -45,7 +45,7 @@ export const FreqNoOfBooking = () => {
     return (
         <div>
             <p className="fs-5 text-center">ความถี่ของจำนวนคืนที่จองบ้านพัก</p>
-            <p className="fs-6 text-center mb-3">(x = จำนวนคือ, y = จำนวนครั้งการจอง)</p>
+            <p className="fs-6 text-center mb-3">(x = จำนวนคืน, y = จำนวนครั้งการจอง)</p>
             <Bar data={dataSet} />
         </div>
     );
