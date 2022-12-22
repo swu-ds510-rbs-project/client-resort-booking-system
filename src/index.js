@@ -17,6 +17,7 @@ import { Login } from './Components/UserAuthentication/Login';
 import { Register } from './Components/UserAuthentication/Register';
 import './font.css';
 import { Profile } from './Components/UserAuthentication/Profile';
+import { Dashboard } from './Components/Dashboard/Dashboard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -29,6 +30,7 @@ root.render(
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   </BrowserRouter>
 );
